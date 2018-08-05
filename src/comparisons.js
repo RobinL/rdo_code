@@ -1,5 +1,6 @@
 import d3 from "d3-format";
 
+
 export let per_fmt = d3.format(",.1%")
 export let int_fmt = d3.format(",.0f")
 
@@ -18,3 +19,32 @@ export function percentage_change(values_comparison, value_key) {
     }
 
  }
+
+
+ export function increase_decrease(values_comparison, value_key) {
+
+  let base = values_comparison['base'][value_key]
+  let comp = values_comparison['comparator'][value_key]
+
+  if (base > comp) {
+   return 'an increase of'
+  } else if (base < base) {
+    return 'a decrease of'
+  } else {
+    return 'a change of'
+  }
+}
+
+export function receipts_vs_disposals_text(row) {
+
+  let r = row['total_receipts']
+  let d = row['total_disposals']
+
+  if (r > d) {
+   return 'Receipts exceeded disposals'
+  } else if (r < d) {
+    return 'Disposals exceeded receipts'
+  } else {
+    return 'Receipts equalled disposals'
+  }
+}
