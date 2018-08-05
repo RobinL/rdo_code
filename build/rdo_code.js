@@ -106,12 +106,17 @@
       return context.canvas;
     }
 
+  function latest_yearquarter(dt) {
+      return dt.sql('select yearquarter from df order by yearquarter desc limit 1')[0]['yearquarter']
+  }
+
   exports.get_csv_and_parse = get_csv_and_parse;
   exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
   exports.select_box_within_html = select_box_within_html;
   exports.sparkline = sparkline;
+  exports.latest_yearquarter = latest_yearquarter;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
