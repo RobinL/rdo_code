@@ -1,0 +1,38 @@
+{
+  "name": "rdo_code",
+  "version": "0.0.1",
+  "description": "Munge open data",
+  "keywords": [],
+  "homepage": "",
+  "license": "BSD-3-Clause",
+  "author": {
+    "name": "Robin Linacre",
+    "url": ""
+  },
+  "main": "build/rdo_code.js",
+  "module": "index",
+  "jsnext:main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobinL/open_data_munge.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf dist && mkdir dist && rollup -c",
+    "test": "tape 'test/**/*-test.js' && eslint index.js src",
+    "prepublish": "npm run test"
+  },
+  "devDependencies": {
+    "eslint": "3",
+    "package-preamble": "0.0.2",
+    "rollup": "0.62.0",
+    "tape": "4",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
+  },
+  "dependencies": {
+    "@observablehq/notebook-stdlib": "^1.1.2",
+    "d3-format": "^1.3.0",
+    "d3-time-format": "^2.1.1",
+    "lodash": "^4.17.10",
+    "papaparse": "^4.5.1"
+  }
+}
