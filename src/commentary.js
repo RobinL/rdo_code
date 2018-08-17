@@ -28,8 +28,8 @@ export function get_keystats_dict(totals_ts, value_col, dt_lib) {
 
 export function get_keystats_dicts(totals_ts, dt_lib) {
     let txt = {}
-    txt.r =  get_keystats_dict(totals_ts, "receipts_total", dt_lib)
-    txt.d =  get_keystats_dict(totals_ts, "disposals_total", dt_lib)
-    txt.o =  get_keystats_dict(totals_ts, "outstanding_total", dt_lib)
+    txt.r =  get_keystats_dict(totals_ts, "sum_receipts", dt_lib)
+    txt.d =  get_keystats_dict(totals_ts, "sum_disposals", dt_lib)
+    txt.o =  get_keystats_dict(totals_ts, "sum_outstanding", dt_lib)
     return txt
 }
