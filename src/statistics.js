@@ -11,3 +11,5 @@ export function total_by_quarter(dt) {
     from df
     group by yearquarter, yearquarter_end_date, yearquarter_mid_date`)
 }
+
+
