@@ -24,7 +24,7 @@
 
     if (base > comp) {
      return 'an increase of'
-    } else if (base < base) {
+    } else if (base < comp) {
       return 'a decrease of'
     } else {
       return 'a change of'
