@@ -6,4 +6,4 @@ export {select_box_within_html} from "./src/observable.js";
 
 export {sparkline} from "./src/sparkline.js"
 
-export {latest_yearquarter} from "./src/statistics.js"
+export {latest_yearquarter, total_by_quarter} from "./src/statistics.js"
