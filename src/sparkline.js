@@ -1,6 +1,6 @@
 import d3 from "d3"
 import _ from "lodash";
-import Library from "@observablehq/notebook-stdlib";
+import {Library} from "@observablehq/notebook-stdlib";
 
 export function sparkline(time_series, value_col, date_col, width = 64, height = 17) {
   let values = time_series.get_column(value_col)
