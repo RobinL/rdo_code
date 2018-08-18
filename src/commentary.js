@@ -1,4 +1,4 @@
-import {per_fmt, int_fmt} from "./comparisons"
+import {int_fmt} from "./comparisons"
 
 
 export function get_keystats_dict(totals_ts, value_col, dt_lib) {
@@ -13,7 +13,7 @@ export function get_keystats_dict(totals_ts, value_col, dt_lib) {
     receipts_text["inc_dec_text_qt"] = dt_lib.increase_decrease_text(row_comp, value_col)
     receipts_text["inc_dec_sym_qt"] = dt_lib.increase_decrease_symbol(row_comp, value_col)
     receipts_text["absolute_change_qt"] = dt_lib.absolute_change(row_comp, value_col)
-    receipts_text["percentage_change_qt"] = per_fmt(dt_lib.percentage_change(row_comp, value_col))
+    receipts_text["percentage_change_qt"] = dt_lib.percentage_change(row_comp, value_col)
 
     row_comp = totals_ts.get_row_comparison("latest", 4)
 
