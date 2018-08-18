@@ -164,11 +164,11 @@
 
   }
 
-  function get_keystats_dicts(totals_ts, dt_lib) {
+  function get_keystats_dicts(totals_ts, date_col, dt_lib) {
       let txt = {};
-      txt.r =  get_keystats_dict(totals_ts, "sum_receipts", dt_lib);
-      txt.d =  get_keystats_dict(totals_ts, "sum_disposals", dt_lib);
-      txt.o =  get_keystats_dict(totals_ts, "sum_outstanding", dt_lib);
+      txt.r =  get_keystats_dict(totals_ts, "sum_receipts", date_col, dt_lib);
+      txt.d =  get_keystats_dict(totals_ts, "sum_disposals", date_col,dt_lib);
+      txt.o =  get_keystats_dict(totals_ts, "sum_outstanding", date_col,dt_lib);
       return txt
   }
 
