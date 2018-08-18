@@ -1,7 +1,9 @@
 import d3 from "d3"
 import _ from "lodash";
+import {DOM} from "@observablehq/notebook-stdlib";
 
-export function sparkline(time_series, value_col, date_col, DOM, width = 64, height = 17) {
+
+export function sparkline(time_series, value_col, date_col, width = 64, height = 17) {
   let values = time_series.get_column(value_col)
   let index = time_series.index
   let index_col = time_series.index_column

@@ -51,7 +51,7 @@
     return a
   }
 
-  function sparkline(time_series, value_col, date_col, DOM, width = 64, height = 17) {
+  function sparkline(time_series, value_col, date_col, width = 64, height = 17) {
     let values = time_series.get_column(value_col);
     let index = time_series.index;
     let index_col = time_series.index_column;
@@ -78,7 +78,7 @@
 
     const x = d3$1.scaleBand().domain(index).range([0.5, width - 1.5]);
     const y = d3$1.scaleLinear().domain([0, _.max(values)]).range([height - 0.5, 0.5]);
-    const context = DOM.context2d(width, height);
+    const context = notebookStdlib.DOM.context2d(width, height);
 
     const line = d3$1.line()
                    .x(d => x(d[index_col]))
@@ -136,28 +136,31 @@
     group by yearquarter, yearquarter_end_date, yearquarter_mid_date`)
   }
 
-  function get_keystats_dict(totals_ts, value_col, dt_lib) {
+  function get_keystats_dict(totals_ts, value_col, date_col, dt_lib) {
 
-      let receipts_text = {};
+      let return_dict = {};
       let latest = totals_ts.get_latest_row();
 
-      receipts_text["latest_total"] = int_fmt(latest[value_col]);
+      return_dict["latest_total"] = int_fmt(latest[value_col]);
+
+      return_dict["spark"]  = sparkline(totals_ts, value_col, date_col);
 
       let row_comp = totals_ts.get_row_comparison("latest", 1);
 
-      receipts_text["inc_dec_text_qt"] = dt_lib.increase_decrease_text(row_comp, value_col);
-      receipts_text["inc_dec_sym_qt"] = dt_lib.increase_decrease_symbol(row_comp, value_col);
-      receipts_text["absolute_change_qt"] = dt_lib.absolute_change(row_comp, value_col);
-      receipts_text["percentage_change_qt"] = dt_lib.percentage_change(row_comp, value_col);
+      return_dict["inc_dec_text_qt"] = dt_lib.increase_decrease_text(row_comp, value_col);
+      return_dict["inc_dec_sym_qt"] = dt_lib.increase_decrease_symbol(row_comp, value_col);
+      return_dict["absolute_change_qt"] = dt_lib.absolute_change(row_comp, value_col);
+      return_dict["percentage_change_qt"] = dt_lib.percentage_change(row_comp, value_col);
+
 
       row_comp = totals_ts.get_row_comparison("latest", 4);
 
-      receipts_text["inc_dec_text_yr"] = dt_lib.increase_decrease_text(row_comp, value_col);
-      receipts_text["inc_dec_sym_yr"] = dt_lib.increase_decrease_symbol(row_comp, value_col);
-      receipts_text["absolute_change_yr"] = dt_lib.absolute_change(row_comp, value_col);
-      receipts_text["percentage_change_yr"] = dt_lib.percentage_change(row_comp, value_col);
+      return_dict["inc_dec_text_yr"] = dt_lib.increase_decrease_text(row_comp, value_col);
+      return_dict["inc_dec_sym_yr"] = dt_lib.increase_decrease_symbol(row_comp, value_col);
+      return_dict["absolute_change_yr"] = dt_lib.absolute_change(row_comp, value_col);
+      return_dict["percentage_change_yr"] = dt_lib.percentage_change(row_comp, value_col);
 
-      return receipts_text
+      return return_dict
 
   }
 
