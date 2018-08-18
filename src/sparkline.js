@@ -1,7 +1,6 @@
 import d3 from "d3"
 import _ from "lodash";
-import {DOM} from "@observablehq/notebook-stdlib";
-
+import Library from "@observablehq/notebook-stdlib";
 
 export function sparkline(time_series, value_col, date_col, width = 64, height = 17) {
   let values = time_series.get_column(value_col)
@@ -30,7 +29,9 @@ export function sparkline(time_series, value_col, date_col, width = 64, height =
 
   const x = d3.scaleBand().domain(index).range([0.5, width - 1.5]);
   const y = d3.scaleLinear().domain([0, _.max(values)]).range([height - 0.5, 0.5]);
-  const context = DOM.context2d(width, height);
+
+  let lib = new Library()
+  const context = lib.DOM.context2d(width, height);
 
   const line = d3.line()
                  .x(d => x(d[index_col]))

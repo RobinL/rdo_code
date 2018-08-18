@@ -2,10 +2,11 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('papaparse'), require('d3-format'), require('@observablehq/notebook-stdlib'), require('d3'), require('lodash')) :
   typeof define === 'function' && define.amd ? define(['exports', 'papaparse', 'd3-format', '@observablehq/notebook-stdlib', 'd3', 'lodash'], factory) :
   (factory((global['open-data'] = {}),null,null,null,null,global._));
-}(this, (function (exports,Papa,d3,notebookStdlib,d3$1,_) { 'use strict';
+}(this, (function (exports,Papa,d3,Library,d3$1,_) { 'use strict';
 
   Papa = Papa && Papa.hasOwnProperty('default') ? Papa['default'] : Papa;
   d3 = d3 && d3.hasOwnProperty('default') ? d3['default'] : d3;
+  var Library__default = 'default' in Library ? Library['default'] : Library;
   d3$1 = d3$1 && d3$1.hasOwnProperty('default') ? d3$1['default'] : d3$1;
   _ = _ && _.hasOwnProperty('default') ? _['default'] : _;
 
@@ -31,7 +32,7 @@
     }
   }
 
-  let lib = new notebookStdlib.Library();
+  let lib = new Library.Library();
 
   function select_box_within_html(elem){
       let a = lib.Generators.observe(change => {
@@ -78,7 +79,9 @@
 
     const x = d3$1.scaleBand().domain(index).range([0.5, width - 1.5]);
     const y = d3$1.scaleLinear().domain([0, _.max(values)]).range([height - 0.5, 0.5]);
-    const context = notebookStdlib.DOM.context2d(width, height);
+
+    let lib = new Library__default();
+    const context = lib.DOM.context2d(width, height);
 
     const line = d3$1.line()
                    .x(d => x(d[index_col]))
