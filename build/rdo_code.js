@@ -33,8 +33,8 @@
 
   function receipts_vs_disposals_text(row) {
 
-    let r = row['total_receipts'];
-    let d = row['total_disposals'];
+    let r = row['sum_receipts'];
+    let d = row['sum_disposals'];
 
     if (r > d) {
      row["chart_text"] = 'Receipts exceeded disposals';
@@ -146,12 +146,16 @@
 
 
   function total_by_quarter(dt) {
-      return dt.sql(`select yearquarter, yearquarter_end_date, yearquarter_mid_date,
+      let data = dt.sql(`select yearquarter, yearquarter_end_date, yearquarter_mid_date,
     sum(receipts) as sum_receipts,
     sum(disposals) as sum_disposals,
     sum(outstanding) as sum_outstanding
     from df
-    group by yearquarter, yearquarter_end_date, yearquarter_mid_date`)
+    group by yearquarter, yearquarter_end_date, yearquarter_mid_date`);
+
+      data = _.map(data, receipts_vs_disposals_text);
+
+      return data
   }
 
   function get_keystats_dict(totals_ts, value_col, date_col, dt_lib) {

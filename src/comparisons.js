@@ -37,8 +37,8 @@ export function percentage_change(values_comparison, value_key) {
 
 export function receipts_vs_disposals_text(row) {
 
-  let r = row['total_receipts']
-  let d = row['total_disposals']
+  let r = row['sum_receipts']
+  let d = row['sum_disposals']
 
   if (r > d) {
    row["chart_text"] = 'Receipts exceeded disposals'
