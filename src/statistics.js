@@ -15,8 +15,6 @@ export function total_by_quarter(dt) {
     from df
     group by yearquarter, yearquarter_end_date, yearquarter_mid_date`)
 
-    data = _.map(data, receipts_vs_disposals_text)
-
     data = _.map(data, function(d) {
         d.receipts_less_disposals = d.sum_receipts - d.sum_disposals
         if (d.receipts_less_disposals > 0) {
