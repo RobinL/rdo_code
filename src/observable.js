@@ -21,6 +21,25 @@ export function select_box_within_html(elem){
   return a
 }
 
+
+export function observe_chart_signal(chart, signal_name, event_type="mousemove"){
+  // See https://github.com/observablehq/notebook-stdlib#Generators_observe
+
+  return lib.Generators.observe(function(change) {
+
+    // change is a function; calling change triggers the resolution of the current promise with the passed value.
+
+    // Yield the element’s initial value.
+    const inputted = () => change(chart.signal(signal_name));
+
+    chart.addEventListener(event_type, inputted);
+
+    change(chart.signal(signal_name));
+
+  })
+
+}
+
 export default function html_table(data,fontSize="small", numrows=5){
   let dataslice = data.slice(0,numrows+1)
   const table = document.createElement("table");
