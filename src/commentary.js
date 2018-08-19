@@ -38,7 +38,7 @@ export function get_keystats_dicts(totals_ts, date_col, dt_lib) {
 }
 
 
-export function get_chart_md(totals_ts, chart_signal, report_period) {
+export function get_chart_md(totals_ts, chart_signal, report_period, dt_lib) {
 
     let index
     if (chart_signal == 0) {
@@ -57,7 +57,7 @@ export function get_chart_md(totals_ts, chart_signal, report_period) {
     cht_md["quarter_end"] = date_fmt(c.base.yearquarter_end_date)
     cht_md["quarter_end_prev"] = date_fmt(c.comparator.yearquarter_end_date)
 
-    cht_md["outstanding_abs"] = dt.absolute_change(c, "sum_outstanding")
+    cht_md["outstanding_abs"] = dt_lib.absolute_change(c, "sum_outstanding")
 
     if (cht_md["receipts"] > cht_md["disposals"]) {
       cht_md["exceeded_text"] = "receipts were higher than disposals"
