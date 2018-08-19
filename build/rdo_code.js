@@ -31,6 +31,22 @@
     }
   }
 
+  function receipts_vs_disposals_text(row) {
+
+    let r = row['total_receipts'];
+    let d = row['total_disposals'];
+
+    if (r > d) {
+     row["chart_text"] = 'Receipts exceeded disposals';
+    } else if (r < d) {
+      row["chart_text"] = 'Disposals exceeded receipts';
+    } else {
+      row["chart_text"] = 'Receipts equalled disposals';
+    }
+
+    return row
+  }
+
   let lib = new notebookStdlib.Library();
 
   function select_box_within_html(elem){
@@ -178,6 +194,7 @@
   exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
+  exports.receipts_vs_disposals_text = receipts_vs_disposals_text;
   exports.select_box_within_html = select_box_within_html;
   exports.sparkline = sparkline;
   exports.latest_yearquarter = latest_yearquarter;

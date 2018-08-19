@@ -41,10 +41,12 @@ export function receipts_vs_disposals_text(row) {
   let d = row['total_disposals']
 
   if (r > d) {
-   return 'Receipts exceeded disposals'
+   row["chart_text"] = 'Receipts exceeded disposals'
   } else if (r < d) {
-    return 'Disposals exceeded receipts'
+    row["chart_text"] = 'Disposals exceeded receipts'
   } else {
-    return 'Receipts equalled disposals'
+    row["chart_text"] = 'Receipts equalled disposals'
   }
+
+  return row
 }
