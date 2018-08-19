@@ -1,12 +1,11 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('papaparse'), require('d3-format'), require('@observablehq/notebook-stdlib'), require('d3'), require('lodash')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'papaparse', 'd3-format', '@observablehq/notebook-stdlib', 'd3', 'lodash'], factory) :
-  (factory((global['open-data'] = {}),null,null,null,null,global._));
-}(this, (function (exports,Papa,d3,notebookStdlib,d3$1,_) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('papaparse'), require('d3'), require('@observablehq/notebook-stdlib'), require('lodash')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'papaparse', 'd3', '@observablehq/notebook-stdlib', 'lodash'], factory) :
+  (factory((global['open-data'] = {}),null,null,null,global._));
+}(this, (function (exports,Papa,d3,notebookStdlib,_) { 'use strict';
 
   Papa = Papa && Papa.hasOwnProperty('default') ? Papa['default'] : Papa;
   d3 = d3 && d3.hasOwnProperty('default') ? d3['default'] : d3;
-  d3$1 = d3$1 && d3$1.hasOwnProperty('default') ? d3$1['default'] : d3$1;
   _ = _ && _.hasOwnProperty('default') ? _['default'] : _;
 
   function get_csv_and_parse(url) {
@@ -96,20 +95,20 @@
     });
 
 
-    const x = d3$1.scaleBand().domain(index).range([0.5, width - 1.5]);
-    const y = d3$1.scaleLinear().domain([0, _.max(values)]).range([height - 0.5, 0.5]);
+    const x = d3.scaleBand().domain(index).range([0.5, width - 1.5]);
+    const y = d3.scaleLinear().domain([0, _.max(values)]).range([height - 0.5, 0.5]);
 
     let lib = new notebookStdlib.Library();
     const context = lib.DOM.context2d(width, height);
 
-    const line = d3$1.line()
+    const line = d3.line()
                    .x(d => x(d[index_col]))
                    .y(d => y(d[value_col]))
                    .context(context);
 
     context.beginPath(), line(time_series.data), context.stroke();
 
-    const area = d3$1.area()
+    const area = d3.area()
       .x(function(d) {return  x(d[index_col])})
       .y0(height)
       .y1(function(d) { return y(d[value_col]); })
