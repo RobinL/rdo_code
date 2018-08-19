@@ -51,6 +51,25 @@
     return a
   }
 
+
+  function observe_chart_signal(chart, signal_name, event_type="mousemove"){
+    // See https://github.com/observablehq/notebook-stdlib#Generators_observe
+
+    return lib.Generators.observe(function(change) {
+
+      // change is a function; calling change triggers the resolution of the current promise with the passed value.
+
+      // Yield the element’s initial value.
+      const inputted = () => change(chart.signal(signal_name));
+
+      chart.addEventListener(event_type, inputted);
+
+      change(chart.signal(signal_name));
+
+    })
+
+  }
+
   function sparkline(time_series, value_col, date_col, width = 64, height = 17) {
     let values = time_series.get_column(value_col);
     let index = time_series.index;
@@ -208,6 +227,7 @@
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
   exports.select_box_within_html = select_box_within_html;
+  exports.observe_chart_signal = observe_chart_signal;
   exports.sparkline = sparkline;
   exports.latest_yearquarter = latest_yearquarter;
   exports.total_by_quarter = total_by_quarter;
