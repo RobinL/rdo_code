@@ -17,6 +17,7 @@ export function total_by_quarter(dt) {
 
     data = _.map(data, function(d) {
         d.receipts_less_disposals = d.sum_receipts - d.sum_disposals
+        d.disposals_less_receipts = d.sum_disposals - d.sum_receipts
         if (d.receipts_less_disposals > 0) {
             d.chart_text = `${d.yearquarter} :Receipts exceeded disposals by ${int_fmt(d.receipts_less_disposals)}`
             d.chart_text_y = d.sum_receipts
