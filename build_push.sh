@@ -1,4 +1,6 @@
+
 npm install .
-git add build/rdo_code.js
-git commit -m "add build"
+git add -u
+git commit -m "auto add"
 git push origin master
+bash get_url.sh

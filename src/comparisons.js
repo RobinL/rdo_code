@@ -1,6 +1,5 @@
 import d3 from "d3-format";
 
-
 export let per_fmt = d3.format(",.1%")
 export let int_fmt = d3.format(",.0f")
 
@@ -41,11 +40,11 @@ export function receipts_vs_disposals_text(row) {
   let d = row['sum_disposals']
 
   if (r > d) {
-   row["chart_text"] = 'Receipts exceeded disposals'
+   row["receipts_less_disposals"] = 'Receipts exceeded disposals'
   } else if (r < d) {
-    row["chart_text"] = 'Disposals exceeded receipts'
+    row["receipts_less_disposals"] = 'Disposals exceeded receipts'
   } else {
-    row["chart_text"] = 'Receipts equalled disposals'
+    row["receipts_less_disposals"] = 'Receipts equalled disposals'
   }
 
   return row

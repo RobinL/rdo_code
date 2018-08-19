@@ -37,11 +37,11 @@
     let d = row['sum_disposals'];
 
     if (r > d) {
-     row["chart_text"] = 'Receipts exceeded disposals';
+     row["receipts_less_disposals"] = 'Receipts exceeded disposals';
     } else if (r < d) {
-      row["chart_text"] = 'Disposals exceeded receipts';
+      row["receipts_less_disposals"] = 'Disposals exceeded receipts';
     } else {
-      row["chart_text"] = 'Receipts equalled disposals';
+      row["receipts_less_disposals"] = 'Receipts equalled disposals';
     }
 
     return row
@@ -154,6 +154,31 @@
     group by yearquarter, yearquarter_end_date, yearquarter_mid_date`);
 
       data = _.map(data, receipts_vs_disposals_text);
+
+      data = _.map(data, function(d) {
+          if (d.receipts_less_disposals > 0) {
+              d.chart_text = `${d.yearquarter} :Receipts exceeded disposals by ${int_fmt(d.receipts_less_disposals)}`;
+              d.chart_text_y = d.sum_receipts;
+              d.legend_value = 'Receipts';
+          } else if (d.disposals_less_receipts > 0) {
+              d.chart_text = `${d.yearquarter} :Disposals exceeded receipts by ${int_fmt(d.disposals_less_receipts)}`;
+              d.chart_text_y = d.sum_disposals;
+              d.legend_value = 'Disposals';
+          } else {
+              d.chart_text = `Receipts equalled disposals`;
+              d.chart_text_y = d.sum_receipts;
+              d.legend_value = 'Receipts';
+          }
+
+          d.receipts_label = '';
+          d.disposals_label = '';
+
+          return d
+      });
+
+      let last_value = data[data.length - 1];
+      last_value.receipts_label = 'Receipts';
+      last_value.disposals_label = 'Disposals';
 
       return data
   }
