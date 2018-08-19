@@ -15,6 +15,7 @@
 
   let per_fmt = d3.format(",.1%");
   let int_fmt = d3.format(",.0f");
+  let date_fmt = d3.timeFormat("%d %b %Y");
 
 
    function increase_decrease(values_comparison, value_key) {
@@ -226,6 +227,7 @@
   exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
+  exports.date_fmt = date_fmt;
   exports.select_box_within_html = select_box_within_html;
   exports.observe_chart_signal = observe_chart_signal;
   exports.sparkline = sparkline;
