@@ -8,4 +8,4 @@ export {sparkline} from "./src/sparkline.js"
 
 export {latest_yearquarter, total_by_quarter} from "./src/statistics.js"
 
-export {get_keystats_dicts} from "./src/commentary.js"
+export {get_keystats_dicts, get_chart_md} from "./src/commentary.js"

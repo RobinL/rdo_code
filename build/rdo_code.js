@@ -222,6 +222,46 @@
       return txt
   }
 
+
+  function get_chart_md(totals_ts, chart_signal, report_period, dt_lib) {
+
+      let index;
+      if (chart_signal == 0) {
+        index = report_period;} else {
+          index = chart_signal["yearquarter"];
+        }
+
+
+      let c = totals_ts.get_row_comparison(index, 1);
+      let cht_md = {};
+
+      cht_md["receipts"] = int_fmt(c.base.sum_receipts);
+      cht_md["disposals"] = int_fmt(c.base.sum_disposals);
+      cht_md["outstanding"] = int_fmt(c.base.sum_outstanding);
+      cht_md["outstanding_prev"] = int_fmt(c.comparator.sum_outstanding);
+      cht_md["quarter_end"] = date_fmt(c.base.yearquarter_end_date);
+      cht_md["quarter_end_prev"] = date_fmt(c.comparator.yearquarter_end_date);
+
+      cht_md["outstanding_abs"] = dt_lib.absolute_change(c, "sum_outstanding");
+
+      if (cht_md["receipts"] > cht_md["disposals"]) {
+        cht_md["exceeded_text"] = "receipts were higher than disposals";
+        cht_md["outstanding_inc_dec"] = "rose";
+        cht_md["outstanding_up_down"] = "up";
+      } else   if (cht_md["disposals"] > cht_md["receipts"]) {
+        cht_md["exceeded_text"] = "disposals were higher than receipts";
+        cht_md["outstanding_inc_dec"] = "fell";
+        cht_md["outstanding_up_down"] = "down";
+      } else {
+        cht_md["exceeded_text"] = "receipts equalled disposals";
+        cht_md["outstanding_inc_dec"] = "stayed the same";
+        cht_md["outstanding_up_down"] = "staying the same";
+      }
+
+      return cht_md
+
+    }
+
   exports.get_csv_and_parse = get_csv_and_parse;
   exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
@@ -233,6 +273,7 @@
   exports.latest_yearquarter = latest_yearquarter;
   exports.total_by_quarter = total_by_quarter;
   exports.get_keystats_dicts = get_keystats_dicts;
+  exports.get_chart_md = get_chart_md;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
