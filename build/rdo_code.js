@@ -31,22 +31,6 @@
     }
   }
 
-  function receipts_vs_disposals_text(row) {
-
-    let r = row['sum_receipts'];
-    let d = row['sum_disposals'];
-
-    if (r > d) {
-     row["receipts_less_disposals"] = 'Receipts exceeded disposals';
-    } else if (r < d) {
-      row["receipts_less_disposals"] = 'Disposals exceeded receipts';
-    } else {
-      row["receipts_less_disposals"] = 'Receipts equalled disposals';
-    }
-
-    return row
-  }
-
   let lib = new notebookStdlib.Library();
 
   function select_box_within_html(elem){
@@ -156,6 +140,7 @@
       data = _.map(data, receipts_vs_disposals_text);
 
       data = _.map(data, function(d) {
+          d.receipts_less_disposals = d.sum_receipts - d.sum_disposals;
           if (d.receipts_less_disposals > 0) {
               d.chart_text = `${d.yearquarter} :Receipts exceeded disposals by ${int_fmt(d.receipts_less_disposals)}`;
               d.chart_text_y = d.sum_receipts;
@@ -223,7 +208,6 @@
   exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
-  exports.receipts_vs_disposals_text = receipts_vs_disposals_text;
   exports.select_box_within_html = select_box_within_html;
   exports.sparkline = sparkline;
   exports.latest_yearquarter = latest_yearquarter;

@@ -1,4 +1,4 @@
-import { receipts_vs_disposals_text, int_fmt } from "./comparisons";
+import { int_fmt } from "./comparisons";
 import _ from "lodash";
 
 
