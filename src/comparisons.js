@@ -34,18 +34,4 @@ export function percentage_change(values_comparison, value_key) {
   }
 }
 
-export function receipts_vs_disposals_text(row) {
 
-  let r = row['sum_receipts']
-  let d = row['sum_disposals']
-
-  if (r > d) {
-   row["receipts_less_disposals"] = 'Receipts exceeded disposals'
-  } else if (r < d) {
-    row["receipts_less_disposals"] = 'Disposals exceeded receipts'
-  } else {
-    row["receipts_less_disposals"] = 'Receipts equalled disposals'
-  }
-
-  return row
-}
