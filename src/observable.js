@@ -3,9 +3,9 @@ import {Library} from "@observablehq/notebook-stdlib";
 
 let lib = new Library()
 
-export function select_box_within_html(elem){
+export function select_box_within_html(elem, id){
     let a = lib.Generators.observe(change => {
-      let selectbox =  elem.getElementsByTagName('select')[0]
+      let selectbox =  elem.getElementById(id)
       // An event listener to yield the element’s new value.
       const inputted = () => change(selectbox.value);
 
