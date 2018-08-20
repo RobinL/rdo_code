@@ -22,7 +22,7 @@ export function select_box_within_html(id){
 }
 
 
-export function observe_chart_signal(chart, signal_name, event_type="mousemove"){
+export function observe_chart_signal(chart, signal_name){
   // See https://github.com/observablehq/notebook-stdlib#Generators_observe
   // See https://beta.observablehq.com/@mbostock/observing-vega-signals
   // See https://talk.observablehq.com/t/retrieving-value-of-selector-in-vega-lite-live/1109
