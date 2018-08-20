@@ -33,9 +33,9 @@
 
   let lib = new notebookStdlib.Library();
 
-  function select_box_within_html(elem, id){
+  function select_box_within_html(id){
       let a = lib.Generators.observe(change => {
-        let selectbox =  elem.getElementById(id);
+        let selectbox =  document.getElementById(id);
         // An event listener to yield the element’s new value.
         const inputted = () => change(selectbox.value);
 
