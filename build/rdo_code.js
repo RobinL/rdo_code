@@ -39,17 +39,18 @@
 
   function observe_chart_signal(chart, signal_name, event_type="mousemove"){
     // See https://github.com/observablehq/notebook-stdlib#Generators_observe
-
-    return lib.Generators.observe(function(change) {
+    // See https://beta.observablehq.com/@mbostock/observing-vega-signals
+    // See https://talk.observablehq.com/t/retrieving-value-of-selector-in-vega-lite-live/1109
+    return lib.Generators.observe(function(notify) {
 
       // change is a function; calling change triggers the resolution of the current promise with the passed value.
 
       // Yield the element’s initial value.
-      const inputted = () => change(chart.signal(signal_name));
 
-      chart.addEventListener(event_type, inputted);
-
-      change(chart.signal(signal_name));
+      const signaled = (name, value) => notify(value);
+      chart.addSignalListener(signal_name, signaled);
+      notify(chart.signal(signal_name));
+      return () => chart.removeSignalListener(signal_name, signaled);
 
     })
 
