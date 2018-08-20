@@ -16,21 +16,6 @@
   let int_fmt = d3.format(",.0f");
   let date_fmt = d3.timeFormat("%d %b %Y");
 
-
-   function increase_decrease(values_comparison, value_key) {
-
-    let base = values_comparison['base'][value_key];
-    let comp = values_comparison['comparator'][value_key];
-
-    if (base > comp) {
-     return 'an increase of'
-    } else if (base < comp) {
-      return 'a decrease of'
-    } else {
-      return 'a change of'
-    }
-  }
-
   let lib = new notebookStdlib.Library();
 
   function select_box_within_html(id){
@@ -263,7 +248,6 @@
     }
 
   exports.get_csv_and_parse = get_csv_and_parse;
-  exports.increase_decrease = increase_decrease;
   exports.per_fmt = per_fmt;
   exports.int_fmt = int_fmt;
   exports.date_fmt = date_fmt;

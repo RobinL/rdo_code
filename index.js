@@ -1,6 +1,6 @@
 export {get_csv_and_parse} from "./src/utils";
 
-export {increase_decrease, per_fmt, int_fmt, date_fmt} from "./src/comparisons.js";
+export {per_fmt, int_fmt, date_fmt} from "./src/comparisons.js";
 
 export {select_box_within_html, observe_chart_signal} from "./src/observable.js";
 
